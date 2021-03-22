@@ -1,0 +1,35 @@
+ <%- include('partials/header.ejs') %>
+
+<div class="card">
+<div class="card-body">
+<div class="table-responsive">
+
+<table class="table">
+<thead class="text-primary">
+<tr>
+<th>ID</th>
+<th>Project Name</th>
+<th>Status</th>
+</tr>
+</thead>
+        <%
+        if(userData.length!=0){
+        var i=1;
+        userData.forEach(function(res){
+   
+        %>
+<tbody>
+<tr>
+ <td><%=res.id; %></td>
+ <td><%=res.name %></td>
+ </tr>
+ </tbody>
+ </div>
+ </div>
+ </div>
+
+
+
+
+
+  <%- include('partials/footer.ejs') %>
