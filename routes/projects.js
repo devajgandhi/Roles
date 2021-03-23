@@ -4,6 +4,7 @@ const projectController =   require('../controller/project_controller');
 /* GET users listing. */
 router.get('', projectController.findAll);
 router.post('', projectController.create);
+router.get('/ajax/project-list',projectController.project_list);
 router.post('/changestatus', projectController.changestatus);
 router.post('/:id', projectController.update);
 router.get('/:id', projectController.findById);

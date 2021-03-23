@@ -1,35 +1,92 @@
  <%- include('partials/header.ejs') %>
-
+        
 <div class="card">
 <div class="card-body">
 <div class="table-responsive">
 
-<table class="table">
+<table id="project" class="table">
 <thead class="text-primary">
 <tr>
 <th>ID</th>
 <th>Project Name</th>
 <th>Status</th>
+<th>created_at</th>
 </tr>
 </thead>
-        <%
-        if(userData.length!=0){
-        var i=1;
-        userData.forEach(function(res){
-   
-        %>
+ 
 <tbody>
-<tr>
- <td><%=res.id; %></td>
- <td><%=res.name %></td>
- </tr>
- </tbody>
- </div>
- </div>
- </div>
+<!--tr>
+ <td>id</td>
+ <td>name</td>
+  <% if('status'== 1){
+                %>
+              <td><a  id="btnStatus_(id)" class="btn btn-success" onclick="return changeStatus(id )">Active</a>
+              <% } else{
+                %>
+                  <td><a id="btnStatus_id" href="#" class="btn btn-danger" onclick="return changeStatus(id)" >Inactive</a>
+             <%  } %>
+  <td>created_at</td>
+ </tr-->
 
+
+
+         </tbody>
+        </table>
+
+          <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+  <script  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script-->
+
+
+ </div>
+ </div>
+ </div>
 
 
 
 
   <%- include('partials/footer.ejs') %>
+    <script type="text/javascript">
+ $(document).ready(function() {
+    $('#project').DataTable( {
+        "processing": true,
+        "serverSide":true,
+        "ajax": "/project/ajax/project-list",
+        "columns": [
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "status" },
+            { "data": "created_at" }
+        ]
+    } );
+    } );
+         
+
+   function changeStatus(id) {
+
+            var tmpStatus = 0;
+            var status = $('#btnStatus_' + id).text();
+         if(status == 'Inactive') {
+           tmpStatus = 1;
+           $('#btnStatus_' + id).text('Active');
+           $('#btnStatus_' + id).removeClass('btn-danger');
+           $('#btnStatus_' + id).addClass('btn-success');
+         } else {
+           tmpStatus = 0;
+           $('#btnStatus_' + id).text('Inactive');
+           $('#btnStatus_' + id).addClass('btn-danger');
+           $('#btnStatus_' + id).removeClass('btn-success');
+         }
+
+           url = "/category/changestatus";
+
+
+
+           $.ajax({
+             type:"POST",
+             url: url, 
+             data: {"id":id,"status":tmpStatus}, 
+             success: function(data) { 
+             // location.reload();
+           } });
+        }
+</script>

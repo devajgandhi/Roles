@@ -81,6 +81,35 @@ var project = function(project){
             }
             });
             };
+           
+    project.project_list = function (length,result) {
+      dbconn.query("Select * from project limit ?",[parseInt(length)], function (err, res) {
+      if(err) {
+        console.log("error: ", err);
+        result(null, err);
+      }
+      else{
+       
+      result(null, res);
+    
+      }
+      });
+      }; 
+      project.count= function(count) {
+        dbconn.query("Select count(*) AS countAll from project", function (err, res) {
+          if(err) {
+            console.log("error: ", err);
+            result(null, err);
+          }
+          else{
+          console.log("res", res);
+          result(null, res);
+        
+          }
+        });
+
+      }; 
+      
     module.exports= project;
 
  

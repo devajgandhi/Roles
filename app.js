@@ -1,7 +1,7 @@
 
 var express = require('express');
 var path = require('path');
-
+var session = require('express-session');
 var app = express();
 let ejs = require('ejs');
 var loginRouter = require('./routes/login');
@@ -14,14 +14,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/dash',function(req,res){
-       res.render('dashboard');     
-});
+
 
 app.use('/',loginRouter);
 app.use('/project',projectRouter);
 app.use('/employee',employeesRouter);
 app.use('/tasks',tasksRouter);
+app.use(session({
+  
+       secret: "random",
+       resave: false,
+       saveUninitialized: false,
+       cookie: {
+         expires: 600000,
+       },
+     })
+     );
 
 
 if (!module.parent) {
