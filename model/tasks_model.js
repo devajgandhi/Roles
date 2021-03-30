@@ -2,11 +2,14 @@
 var dbconn = require('../routes/database');
 
 var tasks = function(tasks){
-
+  var date =new Date();
     
   this.name   = tasks.name ;
   this.project_id= tasks.project_id ;
-  Date=tasks.update_at ;
+  date = tasks.updated_at;
+  date =tasks.created_at;
+  this.description=tasks.description;
+  this.user_id = tasks.user_id
   
  
 }
@@ -38,7 +41,7 @@ var tasks = function(tasks){
       });
       };
     tasks.update = function(id, tasks, result){
-      dbconn.query("UPDATE tasks SET name=?,status=? ,project_id=?, update_at=? WHERE id = ?", [tasks.name,tasks.status,tasks.update_at ,tasks.project_id, id], function (err, res) {
+      dbconn.query("UPDATE tasks SET name=?, description=? , project_id=?, user_id=?, status=? , updated_at=? WHERE id = ?", [tasks.name,tasks.description,tasks.project_id,tasks.user_id,tasks.status,tasks.update_at , id], function (err, res) {
       if(err) {
         console.log("error: ", err);
         result(null, err);
@@ -81,6 +84,19 @@ var tasks = function(tasks){
             }
             });
             };
+            tasks.tasks_list = function (id,length,result) {
+              dbconn.query("Select tasks.id,tasks.name,tasks.status,tasks.created_at,tasks.updated_at, tasks.description,project.status as pstatus,project.name as pname,employee.Username as uname from tasks , project, employee where project.id=tasks.project_id && tasks.user_id=employee.id && tasks.user_id=? limit ?",[id,parseInt(length)], function (err, res) {
+              if(err) {
+                console.log("error: ", err);
+                result(null, err);
+              }
+              else{
+               
+              result(null, res);
+            
+              }
+              });
+              }; 
     module.exports= tasks;
 
  

@@ -1,0 +1,45 @@
+<%- include('partials/header.ejs') %>
+
+<div class="card">
+
+<div class="card-body">
+
+<form method="post" action="/tasks" >
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label> Name</label>
+            <input type="text" class="form-control" id="name" name="name"  >
+        </div>
+    </div>
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Project Id</label>
+            <input type="text" class="form-control" id="project_id" name="project_id"  >
+        </div>
+    </div>
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>User ID</label>
+            <input type="text" class="form-control" id="user_id" name="user_id"  >
+        </div>
+    </div>
+
+   </div>
+   <div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label> Description</label>
+            <input type="text" class="form-control" id="description" name="description"  >
+        </div>
+    </div>
+    </div>
+<div class="row">
+     <div class="update ml-auto mr-auto">
+             <button type="submit" class="btn btn-primary btn-round">ADD Task</button>
+     </div>
+</div>
+</form>
+</div>
+</div>
+  <%- include('partials/footer.ejs') %>

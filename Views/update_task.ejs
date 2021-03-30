@@ -1,0 +1,63 @@
+<%- include('partials/header.ejs') %>
+
+
+
+<div class="card">
+<%
+if(userData.length!=0){
+var i=1;
+userData.forEach(function(res){
+%>
+<div class="card-body">
+<form method="post" action="/tasks/<%= res.id%>">
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Name</label>
+            <input type="text" class="form-control" id="name" name="name"  value="<%= res.name%>" >
+        </div>
+    </div>
+</div> 
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Description</label>
+            <input type="text" class="form-control" id="description" name="description"  value="<%= res.description%>" >
+        </div>
+    </div>
+</div> 
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Project ID</label>
+            <input type="text" class="form-control" id="project_id" name="project_id"  value="<%= res.project_id%>" >
+        </div>
+    </div>
+</div> 
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>User ID</label>
+            <input type="text" class="form-control" id="user_id" name="user_id"  value="<%= res.user_id%>" >
+        </div>
+    </div>
+</div> 
+
+
+      <%  i++; }) %>
+        <% } else{ %>
+            
+               No Data Found
+            
+        <% } %>
+<div class="row">
+     <div class="update ml-auto mr-auto">
+             <button type="submit" class="btn btn-primary btn-round">Update TASK</button>
+     </div>
+</div>
+
+
+
+
+
+<%- include('partials/footer.ejs') %>

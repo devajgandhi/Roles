@@ -1,0 +1,62 @@
+
+ <%- include('partials/header.ejs') %>
+
+<div class="card">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+<div class="card-body">
+<form method="post" action="/project/work/addemployee">
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group"> 
+            <p style="padding-top:20px"> Project Name : <%= userData[0].name %></p>
+            
+        </div>
+    </div>
+    </div>
+    
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <input id="id_project" name="id_project" value=" <%= userData[0].id %>" type="hidden" >
+             </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 pr-1">
+        <div class="form-group">
+        Employees working on it :
+    <select id="User_id" name=User_id multiple="multiple" class="selectpicker" data-live-search="true">
+           <%
+        if(userData.length!=0){
+        var i=1;
+        userData.forEach(function(res){
+        %>
+            <option value="<%= res.User_id %>"><%= res.Username %></option>
+                <%  i++; }) %>
+        <% } else{ %>
+            
+               No Data Found
+          
+        <% } %>            
+        </select>
+                
+        </div>
+    </div>
+</div> 
+<div class="row">
+     <div class="update ml-auto mr-auto">
+             <button type="submit" class="btn btn-primary btn-round">ADD Employees</button>
+     </div>
+</div>
+
+
+
+  <%- include('partials/footer.ejs') %>
+  <script>
+  $(document).ready(function() {
+$('select').selectpicker();
+});
+  </script>

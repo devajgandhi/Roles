@@ -34,11 +34,14 @@ exports.login = function(req, res) {
       res.send(err);}
       else{
        var result=JSON.parse(JSON.stringify(User))
-       console.log(result); 
+      
         if(result.length>0){
       if (result[0].password==req.body.password) {
+        req.session.Username =result[0].Username;
+        req.session.Userid =result[0].id;
+        req.session.role =result[0].role_id;
          
-        res.redirect('/tasks');
+        res.redirect('/dashboard');
        }
 
        else {

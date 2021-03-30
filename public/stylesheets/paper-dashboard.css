@@ -1323,7 +1323,7 @@ textarea.form-control {
   padding: 0 12px; }
 
 .form-group input[type=file] {
-  opacity: 0;
+
   position: absolute;
   top: 0;
   right: 0;
@@ -1843,7 +1843,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
       padding: 5px 15px; }
   .navbar .navbar-nav .nav-link {
     text-transform: uppercase;
-    font-size: 0.7142em;
+    font-size: 1.542em;
     padding: 0.5rem 0.7rem;
     line-height: 1.625rem;
     margin-right: 3px; }

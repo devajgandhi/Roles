@@ -1,0 +1,120 @@
+ <%- include('partials/header.ejs') %>
+        <style>
+        .add{
+           
+          float:right;
+        }
+        </style>
+<div class="card">
+<div class="card-body">
+<div class="">
+<% if(JSON.stringify(session_role)==3){ console.log("employee logged in")}else{%>
+
+<div class="card-header" >
+ <a  class="btn add btn-warning" id="addP" href="/tasks/addtasks/add" >Add</a>
+</div>
+<% } %>
+<table id="tasks" class="table">
+<thead class="text-primary">
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Description</th>
+<th>Project Name</th>
+<th>User Name</th>
+<th>created_at</th>
+<% if(JSON.stringify(session_role)==3){ console.log("employee logged in")}else{%>
+<th>Status</th>
+<th>update</th>
+<th>Delete</th>
+<% } %>
+</tr>
+</thead>
+ 
+<tbody>
+
+
+
+         </tbody>
+        </table>
+
+
+ </div>
+ </div>
+ </div>
+
+
+
+
+  <%- include('partials/footer.ejs') %>
+
+
+    <script type="text/javascript">
+ $(document).ready(function() {
+   <% if(JSON.stringify(session_role)==3){%>
+      $('#tasks').DataTable( {
+        "processing": true,
+        "serverSide":true,
+        "ajax": "/tasks/ajax/tasks-list",
+        "columns": [
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "description" },
+              { "data": "pname" },
+                { "data": "uname" },
+             { "data": "created_at" }
+        ]
+    } );
+
+
+  <% }else{%>
+    $('#tasks').DataTable( {
+        "processing": true,
+        "serverSide":true,
+        "ajax": "/tasks/ajax/tasks-list",
+        "columns": [
+            { "data": "id" },
+            { "data": "name" },
+             { "data": "description" },
+              { "data": "pname" },
+                { "data": "uname" },
+             { "data": "created_at" },
+            { "data": "status" },
+            { "data": "update" },
+            { "data": "delete" }
+        ]
+    } );
+    <% } %>
+    } );
+         
+
+   function changeStatus(id) {
+
+            var tmpStatus = 0;
+            var status = $('#btnStatus_' + id).text();
+         if(status == 'Inactive') {
+           tmpStatus = 1;
+           $('#btnStatus_' + id).text('Active');
+           $('#btnStatus_' + id).removeClass('btn-danger');
+           $('#btnStatus_' + id).addClass('btn-success');
+         } else {
+           tmpStatus = 0;
+           $('#btnStatus_' + id).text('Inactive');
+           $('#btnStatus_' + id).addClass('btn-danger');
+           $('#btnStatus_' + id).removeClass('btn-success');
+         }
+
+           url = "/tasks/changestatus";
+
+
+
+           $.ajax({
+             type:"POST",
+             url: url, 
+             data: {"id":id,"status":tmpStatus}, 
+             success: function(data) { 
+             // location.reload();
+           } });
+        }
+
+</script>

@@ -1,0 +1,70 @@
+<%- include('partials/header.ejs') %>
+
+
+
+<div class="card">
+<%
+if(userData.length!=0){
+var i=1;
+userData.forEach(function(res){
+%>
+<div class="card-body">
+<form method="post" action="/project/<%= res.id%>">
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Name</label>
+            <input type="text" class="form-control" id="name" name="name"  value="<%= res.name%>" >
+        </div>
+    </div>
+</div> 
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Description</label>
+            <input type="text" class="form-control" id="Description" name="Description"  value="<%= res.Description%>" >
+        </div>
+    </div>
+</div> 
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>company name</label>
+            <input type="text" class="form-control" id="company_name" name="company_name"  value="<%= res.Company%>" >
+        </div>
+    </div>
+</div> 
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>start Date</label>
+            <input type="text" class="form-control" id="start_Date" name="start_Date"  value="<%= res.start_Date%>" >
+        </div>
+    </div>
+</div> 
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Deadline</label>
+            <input type="text" class="form-control" id="Deadline" name="Deadline"  value="<%= res.Deadline%>" >
+        </div>
+    </div>
+</div> 
+
+      <%  i++; }) %>
+        <% } else{ %>
+            
+               No Data Found
+            
+        <% } %>
+<div class="row">
+     <div class="update ml-auto mr-auto">
+             <button type="submit" class="btn btn-primary btn-round">update Project</button>
+     </div>
+</div>
+
+
+
+
+
+<%- include('partials/footer.ejs') %>

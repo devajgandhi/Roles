@@ -1,38 +1,31 @@
  <%- include('partials/header.ejs') %>
 
 <div class="card">
+<% if(JSON.stringify( session_role)==3){ console.log("employee logged in")}else{%>
+<div class="card-header" >
+ <a style="float:right;"  class="btn btn-warning" href="/employee/addemp/add" >Add</a>
+</div>
+<% }%>
 <div class="card-body">
-<div class="table-responsive">
+<div class="">
 
-<table class="table">
+<table id="employee" class="table">
 <thead class="text-primary">
 <tr>
 <th>ID</th>
+<th>Profile Picture</th>
 <th>User Name</th>
-<th>password</th>
 <th>Mobile Number</th>
 <th>Email</th>
-<th>status</th>
 <th>Role</th>
+<th>created_at</th>
+<% if(JSON.stringify( session_role)==3){ console.log("employee logged in")}else{%>
+<th>status</th>
+<th>Update</th>
+<th>Delete</th>
+<% }%>
 </tr>
 </thead>
-        <%
-        if(userData.length!=0){
-        var i=1;
-        userData.forEach(function(res){
-   
-        %>
-<tbody>
-<tr>
-</tr>
-
- <%  i++; }) %>
-        <% } else{ %>
-            <tr>
-                <td colspan="7">No Data Found</td>
-            </tr>
-        <% } %>
-</tbody>
 </table>
 </div>
 </div>
@@ -41,3 +34,72 @@
 
 
   <%- include('partials/footer.ejs') %>
+   <script type="text/javascript">
+ $(document).ready(function() {
+   <% if(JSON.stringify( session_role)==3){%>
+
+ $('#employee').DataTable( {
+        "processing": true,
+        "serverSide":true,
+        "ajax": "/employee/ajax/employee-list",
+        "columns": [
+            { "data": "id" },
+              { "data": "profile_picture" },
+            { "data": "Username" },
+            { "data": "mobile_no" },
+            { "data": "email" },
+            { "data": "role" },
+            { "data": "created_at" },
+        ]
+    } );
+   <% }else{%>
+    $('#employee').DataTable( {
+        "processing": true,
+        "serverSide":true,
+        "ajax": "/employee/ajax/employee-list",
+        "columns": [
+            { "data": "id" },
+              { "data": "profile_picture" },
+            { "data": "Username" },
+            { "data": "mobile_no" },
+            { "data": "email" },
+            { "data": "role" },
+              { "data": "created_at" },
+            { "data": "status" },
+            { "data": "update" },
+            { "data": "delete" }
+        ]
+    } );
+    <% }%>
+    } );
+         
+
+   function changeStatus(id) {
+
+            var tmpStatus = 0;
+            var status = $('#btnStatus_' + id).text();
+         if(status == 'Inactive') {
+           tmpStatus = 1;
+           $('#btnStatus_' + id).text('Active');
+           $('#btnStatus_' + id).removeClass('btn-danger');
+           $('#btnStatus_' + id).addClass('btn-success');
+         } else {
+           tmpStatus = 0;
+           $('#btnStatus_' + id).text('Inactive');
+           $('#btnStatus_' + id).addClass('btn-danger');
+           $('#btnStatus_' + id).removeClass('btn-success');
+         }
+
+           url = "/employee/changestatus";
+
+
+
+           $.ajax({
+             type:"POST",
+             url: url, 
+             data: {"id":id,"status":tmpStatus}, 
+             success: function(data) { 
+             // location.reload();
+           } });
+        }
+</script>

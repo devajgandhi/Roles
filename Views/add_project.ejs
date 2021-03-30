@@ -1,0 +1,55 @@
+ <%- include('partials/header.ejs') %>
+
+<div class="card">
+
+<div class="card-body">
+<form method="post" action="/project">
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Name</label>
+            <input type="text" class="form-control" id="name" name="name"  >
+        </div>
+    </div>
+</div> 
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Description</label>
+            <input type="text" class="form-control" id="Description" name="Description"  >
+        </div>
+    </div>
+</div>
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Company Name</label>
+            <input type="text" class="form-control" id="company_name" name="company_name"  >
+        </div>
+    </div>
+</div>
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Start DATE</label>
+            <input type="date" class="form-control" id="start_Date" name="start_Date"  >
+        </div>
+    </div>
+</div>
+<div class="row">
+     <div class="col-md-5 pr-1">
+        <div class="form-group">
+             <label>Deadline</label>
+            <input type="date" class="form-control" id="Deadline" name="Deadline"  >
+        </div>
+    </div>
+</div>
+<div class="row">
+     <div class="update ml-auto mr-auto">
+             <button type="submit" class="btn btn-primary btn-round">ADD Project</button>
+     </div>
+</div>
+
+
+
+  <%- include('partials/footer.ejs') %>
